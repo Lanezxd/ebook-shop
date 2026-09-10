@@ -178,21 +178,21 @@ function TrackOrderContent() {
   return (
     <div className="max-w-3xl mx-auto px-4 pt-8 sm:pt-12">
       {/* Title */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60 mb-3">
-          <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-          <span>ระบบค้นหาปลอดภัยสองชั้น (2-Factor Verification)</span>
+      <div className="text-center mb-6 sm:mb-8 px-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60 mb-2.5 sm:mb-3 whitespace-nowrap">
+          <ShieldCheck className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+          <span>ระบบค้นหาปลอดภัยสองชั้น (2-Factor)</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
           ติดตามคำสั่งซื้อ E-book
         </h1>
-        <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
-          เพื่อความเป็นส่วนตัวและความปลอดภัย กรุณาระบุทั้ง <strong>Order ID</strong> และ <strong>อีเมล</strong> ที่ใช้ในการสั่งซื้อ
+        <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-sm sm:max-w-md mx-auto leading-relaxed">
+          กรุณาระบุทั้ง <strong>Order ID</strong> และ <strong>อีเมล</strong> เพื่อความปลอดภัยของข้อมูล
         </p>
       </div>
 
       {/* 2-Factor Search Form: Order ID + Email */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm mb-8">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-slate-200/80 shadow-sm mb-6 sm:mb-8">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Input 1: Order ID */}
@@ -382,19 +382,22 @@ export default function TrackOrderPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3.5 flex items-center justify-between gap-2">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 transition whitespace-nowrap shrink-0"
           >
-            <ArrowLeft className="w-4 h-4" /> กลับหน้าร้าน
+            <ArrowLeft className="w-4 h-4 shrink-0" />
+            <span className="hidden sm:inline">กลับหน้าร้าน</span>
+            <span className="sm:hidden">กลับ</span>
           </Link>
-          <div className="flex items-center gap-2 font-bold text-lg text-blue-600">
-            <BookOpen className="w-5 h-5" />
+          <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-base sm:text-lg text-blue-600 whitespace-nowrap shrink-0">
+            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
             <span>Vibe E-Book Store</span>
           </div>
-          <div className="w-20" />
+          {/* Spacer สำหรับจัดกึ่งกลาง: ปรับให้แคบลงบนจอมือถือเพื่อไม่ให้เบียดชื่อร้าน */}
+          <div className="w-4 sm:w-20 shrink-0" />
         </div>
       </header>
 

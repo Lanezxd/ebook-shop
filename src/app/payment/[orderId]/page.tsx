@@ -209,23 +209,45 @@ export default function PaymentPage() {
 
       <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
         {/* ========================================================================= */}
-        {/* 🚨 ป้ายแจ้งเตือน DEMO ONLY ตัวใหญ่และมองเห็นได้ชัดเจนมากตามข้อกำหนด */}
+        {/*  ป้ายแจ้งเตือน DEMO ONLY ตัวใหญ่และมองเห็นได้ชัดเจนมากตามข้อกำหนด */}
         {/* ========================================================================= */}
-        <div className="mb-8 rounded-3xl bg-rose-600 text-white p-5 sm:p-7 shadow-xl shadow-rose-600/20 border-4 border-rose-500 animate-pulse">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
+        <div className="mb-5 sm:mb-8 rounded-2xl sm:rounded-3xl bg-rose-600 text-white p-4 sm:p-7 shadow-lg sm:shadow-xl shadow-rose-600/20 border-2 sm:border-4 border-rose-500">
+          <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+            {/* Icon บน Desktop */}
+            <div className="hidden sm:flex w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/20 items-center justify-center shrink-0">
               <AlertTriangle className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
-            <div>
-              <span className="inline-block px-3 py-0.5 rounded-full text-xs font-black bg-white text-rose-700 uppercase tracking-wider mb-1">
-                DEMO PAYMENT ONLY
-              </span>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
-                DEMO ONLY (ระบบจำลอง ห้ามโอนเงินจริง)
+
+            <div className="flex-1 min-w-0">
+              {/* Badge & Icon บน Mobile */}
+              <div className="flex items-center gap-2 mb-1.5 sm:mb-1">
+                <div className="sm:hidden w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                  <AlertTriangle className="w-3.5 h-3.5 text-white" />
+                </div>
+                <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black bg-white text-rose-700 uppercase tracking-wider">
+                  DEMO PAYMENT ONLY
+                </span>
+              </div>
+
+              {/* หัวข้อคำเตือน */}
+              <h1 className="text-lg sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-tight">
+                DEMO ONLY
               </h1>
-              <p className="text-xs sm:text-sm text-rose-100 mt-1 font-medium leading-relaxed">
-                ระบบนี้เป็นเพียงแบบจำลองสำหรับทดสอบ Flow หน้าบ้านเท่านั้น <strong>ห้ามทำการโอนเงินหรือตัดเงินจริงเด็ดขาด</strong> กรุณากดปุ่ม <em>"จำลองชำระเงินสำเร็จ"</em> ด้านล่างเพื่อทดสอบระบบ
+
+              {/* Desktop Description */}
+              <p className="hidden sm:block text-xs sm:text-sm text-rose-100 mt-1 font-medium leading-relaxed">
+                ระบบนี้เป็นเพียงแบบจำลองสำหรับทดสอบ Flow หน้าบ้านเท่านั้น กรุณากดปุ่ม <em>"จำลองชำระเงินสำเร็จ"</em> ด้านล่างเพื่อทดสอบระบบ
               </p>
+
+              {/* Mobile Description: ปรับให้อ่านง่าย ชิดซ้ายตรงกัน สบายตา */}
+              <div className="sm:hidden mt-2.5 bg-rose-700/60 rounded-xl p-3 border border-rose-400/40 text-xs text-rose-50 space-y-1 text-left">
+                <div className="font-bold text-white text-left">
+                  <span>ห้ามโอนเงินหรือสแกนจ่ายจริงเด็ดขาด</span>
+                </div>
+                <p className="text-[11.5px] text-rose-100 leading-relaxed text-left">
+                  ระบบนี้เป็นแบบจำลองสำหรับทดสอบ Flow กรุณากดปุ่ม <strong className="text-white underline underline-offset-2">"จำลองชำระเงินสำเร็จ"</strong> ด้านล่างเพื่อทดสอบ
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -251,37 +273,39 @@ export default function PaymentPage() {
         )}
 
         {/* Card แสดง QR Code จำลองและสรุปยอดเงิน */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-sm">
           {/* Header ยอดเงิน & สถานะ */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-5 sm:pb-6 border-b border-slate-100">
             <div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 mb-2">
-                <Clock className="w-3.5 h-3.5" /> สถานะ: รอการชำระเงิน (PENDING)
+              <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-amber-100 text-amber-800 mb-2">
+                <Clock className="w-3.5 h-3.5 shrink-0" /> สถานะ: รอการชำระเงิน (PENDING)
               </span>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              <h2 className="text-lg sm:text-2xl font-bold text-slate-900">
                 จำลองการชำระเงินค่า E-book
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                 {order?.books?.title || 'รายการหนังสือ E-book'}
               </p>
             </div>
-            <div className="text-right">
-              <span className="text-xs text-slate-400 block">ยอดที่ต้องชำระ</span>
-              <span className="text-3xl sm:text-4xl font-black text-blue-600">
+            <div className="sm:text-right flex sm:flex-col items-baseline justify-between sm:justify-start pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-100/80">
+              <span className="text-xs text-slate-400">ยอดที่ต้องชำระ</span>
+              <span className="text-2xl sm:text-4xl font-black text-blue-600">
                 ฿{Number(order?.amount || 0).toLocaleString()}
               </span>
             </div>
           </div>
 
           {/* Reference Order ID */}
-          <div className="my-5 p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <div className="flex items-center gap-2">
-              <span className="text-slate-500">หมายเลขคำสั่งซื้อ:</span>
-              <code className="font-mono font-semibold text-slate-800">{orderId}</code>
+          <div className="my-4 sm:my-5 p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 min-w-0">
+              <span className="text-slate-500 shrink-0 font-medium">หมายเลขคำสั่งซื้อ:</span>
+              <code className="font-mono font-semibold text-slate-800 break-all text-[11px] sm:text-xs bg-white px-2 py-0.5 rounded border border-slate-200/60">
+                {orderId}
+              </code>
             </div>
             <button
               onClick={() => copyToClipboard(orderId)}
-              className="inline-flex items-center gap-1 text-slate-600 hover:text-blue-600 font-medium transition cursor-pointer"
+              className="inline-flex items-center self-end sm:self-auto gap-1 text-slate-600 hover:text-blue-600 font-medium transition cursor-pointer shrink-0 pt-1 sm:pt-0"
             >
               <Copy className="w-3.5 h-3.5" />
               <span>{copied ? 'คัดลอกแล้ว!' : 'คัดลอกรหัส'}</span>

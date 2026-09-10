@@ -215,48 +215,61 @@ export default function CheckoutPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 pb-20">
       {/* Top Header */}
-      <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 transition whitespace-nowrap shrink-0"
           >
-            <ArrowLeft className="w-4 h-4" /> กลับหน้าร้าน
+            <ArrowLeft className="w-4 h-4 shrink-0" />
+            <span className="hidden sm:inline">กลับหน้าร้าน</span>
+            <span className="sm:hidden">กลับ</span>
           </Link>
-          <div className="flex items-center gap-2 font-bold text-lg text-blue-600">
-            <BookOpen className="w-5 h-5" />
+          <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-base sm:text-lg text-blue-600 whitespace-nowrap shrink-0">
+            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
             <span>Vibe Checkout</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-            <Lock className="w-3.5 h-3.5" /> ชำระเงินปลอดภัย
+          <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs text-emerald-700 bg-emerald-50 px-2 sm:px-2.5 py-1 rounded-full border border-emerald-200 whitespace-nowrap shrink-0">
+            <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+            <span className="hidden sm:inline">ชำระเงินปลอดภัย</span>
+            <span className="sm:hidden">ปลอดภัย</span>
           </div>
         </div>
       </header>
 
       {/* Main Container */}
-      <div className="max-w-5xl mx-auto px-4 pt-6 sm:pt-10">
-        {/* Progress steps */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 mb-8 text-xs sm:text-sm font-medium text-slate-500">
-          <span className="flex items-center gap-1.5 text-blue-600 font-semibold">
-            <span className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs">
+      <div className="max-w-5xl mx-auto px-3.5 sm:px-4 pt-4 sm:pt-10">
+        {/* Progress steps (ปรับให้แสดงผลในบรรทัดเดียว ไม่ตัดคำหรือขึ้นบรรทัดใหม่อย่างไม่เหมาะสมบนมือถือ) */}
+        <div className="flex items-center justify-center gap-1.5 sm:gap-4 mb-6 sm:mb-8 text-xs sm:text-sm font-medium text-slate-500 py-1">
+          {/* ขั้นตอนที่ 1 */}
+          <div className="flex items-center gap-1 sm:gap-1.5 text-blue-600 font-semibold whitespace-nowrap shrink-0">
+            <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] sm:text-xs shrink-0">
               1
             </span>
-            กรอกข้อมูลสั่งซื้อ
-          </span>
-          <span className="w-8 h-[2px] bg-slate-200" />
-          <span className="flex items-center gap-1.5">
-            <span className="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs">
+            <span className="hidden sm:inline">กรอกข้อมูลสั่งซื้อ</span>
+            <span className="sm:hidden text-[11px]">ข้อมูลสั่งซื้อ</span>
+          </div>
+
+          <span className="w-4 sm:w-8 h-[2px] bg-slate-200 shrink-0" />
+
+          {/* ขั้นตอนที่ 2 */}
+          <div className="flex items-center gap-1 sm:gap-1.5 whitespace-nowrap shrink-0">
+            <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] sm:text-xs shrink-0">
               2
             </span>
-            ชำระเงิน
-          </span>
-          <span className="w-8 h-[2px] bg-slate-200" />
-          <span className="flex items-center gap-1.5">
-            <span className="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs">
+            <span className="text-[11px] sm:text-sm">ชำระเงิน</span>
+          </div>
+
+          <span className="w-4 sm:w-8 h-[2px] bg-slate-200 shrink-0" />
+
+          {/* ขั้นตอนที่ 3 */}
+          <div className="flex items-center gap-1 sm:gap-1.5 whitespace-nowrap shrink-0">
+            <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] sm:text-xs shrink-0">
               3
             </span>
-            รับ E-book ทางอีเมล
-          </span>
+            <span className="hidden sm:inline">รับ E-book ทางอีเมล</span>
+            <span className="sm:hidden text-[11px]">รับ E-book</span>
+          </div>
         </div>
 
         {errorMessage && (
@@ -268,8 +281,8 @@ export default function CheckoutPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Form Section (7 cols on lg) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
-            <div className="border-b border-slate-100 pb-5 mb-6">
+          <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-slate-200/80 shadow-sm">
+            <div className="border-b border-slate-100 pb-4 sm:pb-5 mb-5 sm:mb-6">
               <h1 className="text-xl sm:text-2xl font-bold text-slate-900">
                 ข้อมูลผู้รับ E-book
               </h1>
@@ -278,10 +291,10 @@ export default function CheckoutPage() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               {/* Field: Customer Name */}
               <div>
-                <label className="block text-sm font-semibold text-slate-800 mb-1.5">
+                <label className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5">
                   ชื่อ-นามสกุล <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -294,14 +307,14 @@ export default function CheckoutPage() {
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                     placeholder="เช่น สมชาย ใจดี"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
                   />
                 </div>
               </div>
 
               {/* Field: Customer Email */}
               <div>
-                <label className="block text-sm font-semibold text-slate-800 mb-1.5">
+                <label className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5">
                   อีเมลสำหรับรับไฟล์ E-book <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -314,37 +327,36 @@ export default function CheckoutPage() {
                     value={customerEmail}
                     onChange={(e) => setCustomerEmail(e.target.value)}
                     placeholder="name@example.com"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
                   />
                 </div>
-                <p className="mt-1.5 text-xs text-slate-500 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                  ระบบจะส่งลิงก์ดาวน์โหลดหนังสือไปยังอีเมลนี้ทันทีหลังชำระเงิน
+                <p className="mt-1.5 text-[11px] sm:text-xs text-slate-500 flex items-center gap-1.5 leading-normal">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                  <span>ส่งลิงก์ดาวน์โหลดหนังสือไปยังอีเมลนี้ทันทีหลังชำระเงิน</span>
                 </p>
               </div>
 
               {/* Terms Checkbox */}
-              <div className="pt-2">
-                <label className="flex items-start gap-3 cursor-pointer select-none">
+              <div className="pt-1">
+                <label className="flex items-start gap-2.5 cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={acceptTerms}
                     onChange={(e) => setAcceptTerms(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                    className="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 shrink-0"
                   />
-                  <span className="text-xs text-slate-600 leading-relaxed">
-                    ฉันยอมรับว่าสินค้าเป็นไฟล์ดิจิทัล (E-book) และยอมรับข้อกำหนดในการใช้งาน
-                    ตลอดจนนโยบายความเป็นส่วนตัว
+                  <span className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                    ฉันยอมรับว่าสินค้าเป็นไฟล์ดิจิทัล (E-book) และยอมรับข้อกำหนดในการใช้งาน ตลอดจนนโยบายความเป็นส่วนตัว
                   </span>
                 </label>
               </div>
 
               {/* Submit Button */}
-              <div className="pt-4">
+              <div className="pt-3 sm:pt-4">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-6 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] disabled:bg-blue-400 text-white font-semibold text-base shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3.5 px-6 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] disabled:bg-blue-400 text-white font-semibold text-sm sm:text-base shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -362,22 +374,22 @@ export default function CheckoutPage() {
               </div>
 
               {/* Security Badges */}
-              <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 text-slate-500 text-xs">
-                <div className="flex items-center gap-2">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-3.5 sm:pt-4 border-t border-slate-100 text-slate-500 text-[11px] sm:text-xs">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>รองรับการจ่ายเงินผ่าน QR PromptPay</span>
+                  <span className="whitespace-nowrap">จ่ายผ่าน PromptPay</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <Download className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>รับไฟล์ทันทีแบบ Realtime</span>
+                  <span className="whitespace-nowrap">รับไฟล์ทันที (PDF)</span>
                 </div>
               </div>
             </form>
           </div>
 
           {/* Book Summary Card (5 cols on lg) */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm sticky top-24">
-            <h2 className="text-base font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
+          <div className="lg:col-span-5 bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-slate-200/80 shadow-sm sticky top-24">
+            <h2 className="text-sm sm:text-base font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
               <span>สรุปคำสั่งซื้อ</span>
               <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">
                 1 รายการ

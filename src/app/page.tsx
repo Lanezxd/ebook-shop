@@ -129,38 +129,47 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-8 pb-12 sm:pt-14 sm:pb-16 px-4 sm:px-6 bg-gradient-to-b from-white via-slate-50 to-slate-50 border-b border-slate-200/60">
+      <section className="relative overflow-hidden pt-6 pb-10 sm:pt-14 sm:pb-16 px-4 sm:px-6 bg-gradient-to-b from-white via-slate-50 to-slate-50 border-b border-slate-200/60">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60 mb-5 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>คลังหนังสือดิจิทัลยุคใหม่สำหรับนักพัฒนา</span>
-            <span className="w-1 h-1 rounded-full bg-blue-400" />
+          {/* Badge (ปรับให้กระชับบนจอมือถือ อยู่ในบรรทัดเดียว ไม่ตัดคำ) */}
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60 mb-4 sm:mb-5 shadow-xs whitespace-nowrap">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+            <span className="hidden sm:inline">คลังหนังสือดิจิทัลยุคใหม่สำหรับนักพัฒนา</span>
+            <span className="sm:hidden">คลัง E-book สำหรับนักพัฒนา</span>
+            <span className="w-1 h-1 rounded-full bg-blue-400 shrink-0" />
             <span className="text-slate-500 font-normal">อัปเดต 2026</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15] sm:leading-[1.2]">
-            เรียนรู้เทคโนโลยีด้วย{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+          {/* Headline (ป้องกัน E-book หลุดบรรทัดเป็น E- / book) */}
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.25] sm:leading-[1.2]">
+            <span className="block sm:inline">เรียนรู้เทคโนโลยีด้วย</span>{' '}
+            <span className="whitespace-nowrap bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
               E-book ฉบับกระชับ
             </span>
           </h1>
 
-          <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            คู่มือเชิงปฏิบัติการ อัดแน่นด้วยตัวอย่างโค้ดจริง สั่งซื้อง่ายผ่าน PromptPay QR
-            รับไฟล์ PDF เข้าอีเมลทันทีพร้อมอ่านได้ทุกอุปกรณ์
-          </p>
+          {/* Description Paragraph (จัดข้อความให้อ่านง่าย สบายตา ไม่ตัดคำหลุดบรรทัดบนมือถือ) */}
+          <div className="mt-3.5 sm:mt-4 text-[13px] sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed sm:leading-relaxed px-2 sm:px-0">
+            <p className="hidden sm:block">
+              คู่มือเชิงปฏิบัติการ อัดแน่นด้วยตัวอย่างโค้ดจริง สั่งซื้อง่ายผ่าน PromptPay QR
+              รับไฟล์ PDF เข้าอีเมลทันทีพร้อมอ่านได้ทุกอุปกรณ์
+            </p>
+            <div className="sm:hidden space-y-1 text-slate-600">
+              <p>คู่มือเชิงปฏิบัติการ อัดแน่นด้วยตัวอย่างโค้ดจริง</p>
+              <p className="text-slate-500 text-xs">สั่งซื้อง่ายผ่าน PromptPay • รับไฟล์เข้าอีเมลทันที</p>
+            </div>
+          </div>
 
           {/* Value Props Pills */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 text-xs text-slate-600">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">
-              <Smartphone className="w-3.5 h-3.5 text-blue-600" /> อ่านบน Web & Mobile App
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-[11px] sm:text-xs text-slate-600">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs whitespace-nowrap">
+              <Smartphone className="w-3.5 h-3.5 text-blue-600 shrink-0" /> อ่านได้ทุกอุปกรณ์
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">
-              <Zap className="w-3.5 h-3.5 text-amber-500" /> ส่งเข้าอีเมลทันที
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs whitespace-nowrap">
+              <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0" /> ส่งเข้าอีเมลทันที
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> รองรับ PromptPay QR
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs whitespace-nowrap">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" /> จ่ายผ่าน PromptPay
             </span>
           </div>
         </div>
