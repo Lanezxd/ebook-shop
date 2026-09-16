@@ -56,6 +56,31 @@ export default function PaymentPage() {
           .maybeSingle();
 
         if (data && !error) {
+          if (data.books) {
+            if (
+              data.book_id === 1 ||
+              data.books.cover_url?.startsWith('C:') ||
+              data.books.cover_url?.includes('Downloads') ||
+              data.books.cover_url?.includes('media-player-pro')
+            ) {
+              data.books.cover_url = '/images/media-player-pro.jpg';
+              data.books.title = data.books.title || 'Media Player PRO';
+            } else if (
+              data.book_id === 2 ||
+              data.books.cover_url?.includes('photo-1618005182384') ||
+              data.books.cover_url?.includes('tarot-reading-pro')
+            ) {
+              data.books.cover_url = '/images/tarot-reading-pro.jpg';
+              data.books.title = data.books.title || 'Tarot Reading PRO';
+            } else if (
+              data.book_id === 3 ||
+              data.books.cover_url?.includes('photo-1544383835') ||
+              data.books.cover_url?.includes('sqlite-task-manager-pro')
+            ) {
+              data.books.cover_url = '/images/sqlite-task-manager-pro.jpg';
+              data.books.title = data.books.title || 'SQLite Task Manager PRO';
+            }
+          }
           setOrder(data);
           // หากสถานะเป็น PAID อยู่แล้ว ให้ redirect ไปหน้าติดตามผลได้เลย
           if (data.status === 'PAID') {
@@ -68,14 +93,13 @@ export default function PaymentPage() {
             book_id: 1,
             customer_name: 'ผู้สั่งซื้อ E-book (จำลอง)',
             customer_email: 'customer@example.com',
-            amount: 490,
+            amount: 390,
             status: 'PENDING',
             created_at: new Date().toISOString(),
             books: {
-              title: 'Next.js 15 & React 19 Fullstack Mastery',
-              cover_url:
-                'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop',
-              price: 490,
+              title: 'Media Player PRO',
+              cover_url: '/images/media-player-pro.jpg',
+              price: 390,
             },
           });
         }
@@ -196,7 +220,7 @@ export default function PaymentPage() {
         <div className="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg text-blue-600">
             <BookOpen className="w-5 h-5" />
-            <span>Vibe E-Book Store</span>
+            <span>E-Book Store</span>
           </Link>
           <Link
             href="/track"

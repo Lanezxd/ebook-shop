@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vibe E-Book Store | คลังหนังสือดิจิทัลสำหรับนักพัฒนา",
+  title: "E-Book Store | คลังหนังสือดิจิทัลสำหรับนักพัฒนา",
   description: "คู่มือและ E-book คุณภาพสูงสำหรับนักพัฒนาและผู้สนใจเทคโนโลยีสมัยใหม่ สั่งซื้อง่าย รับไฟล์ทันที",
 };
 

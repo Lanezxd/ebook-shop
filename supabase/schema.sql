@@ -83,24 +83,24 @@ WITH CHECK (status IN ('PAID', 'CANCELLED'));
 INSERT INTO public.books (title, description, price, cover_url, file_path)
 VALUES
   (
-    'Next.js 15 & React 19 Fullstack Mastery',
-    'คู่มือพัฒนาเว็บแอปพลิเคชันสมัยใหม่ด้วย Next.js App Router, Server Actions และ TypeScript ครบวงจรตั้งแต่เริ่มต้นจน Deploy ขึ้น Vercel',
-    490.00,
-    'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop',
-    'ebooks/nextjs-fullstack-mastery.pdf'
-  ),
-  (
-    'The Art of Vibe Coding: AI-Driven Development',
-    'เทคนิคการเขียนโค้ดและส่งมอบซอฟต์แวร์ด้วย AI Agents และ LLMs อย่างมีประสิทธิภาพ ก้าวสู่ยุคใหม่ของนักพัฒนาที่มีพลังในการสร้างสรรค์ไร้ขีดจำกัด',
+    'Media Player PRO',
+    'เล่นได้มากกว่า...มากกว่าการฟังและดู คู่มือการใช้งาน Media Player PRO อย่างละเอียด พร้อมเทคนิคการเล่นไฟล์เพลงและวิดีโอ การจัดการรายการเพลง และการควบคุมฟังก์ชันครบครัน',
     390.00,
-    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
-    'ebooks/vibe-coding-guide.pdf'
+    '/images/media-player-pro.jpg',
+    'ebooks/media-player-pro.pdf'
   ),
   (
-    'Mastering Supabase & PostgreSQL Architecture',
-    'เจาะลึกการออกแบบฐานข้อมูล, Row Level Security (RLS), Realtime และ Edge Functions เพื่อสร้างระบบหลังบ้านที่ปลอดภัยและรองรับการขยายตัวได้ดีเยี่ยม',
-    550.00,
-    'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop',
-    'ebooks/mastering-supabase.pdf'
+    'Tarot Reading PRO',
+    'เรียนรู้การอ่านไพ่ทาโรต์ เข้าใจความหมาย ตีความได้จริง ใช้ได้ในชีวิตประจำวัน ปูพื้นฐานครบทุกใบ พร้อมวิธีการตีความและตัวอย่างการใช้งานจริง',
+    199.00,
+    '/images/tarot-reading-pro.jpg',
+    'ebooks/tarot-reading-pro.pdf'
+  ),
+  (
+    'SQLite Task Manager PRO',
+    'คู่มือการจัดการงานด้วย SQLite: สร้างระบบ Task Manager ของคุณเอง ตั้งแต่พื้นฐานการใช้งาน SQLite จนถึงการจัดการงานอย่างเป็นระบบ',
+    259.00,
+    '/images/sqlite-task-manager-pro.jpg',
+    'ebooks/sqlite-task-manager-pro.pdf'
   )
 ON CONFLICT DO NOTHING;

@@ -113,15 +113,15 @@ export async function POST(request: NextRequest) {
     console.log('[API /api/send-email] Sending email via resend.emails.send()...');
 
     const emailResponse = await resend.emails.send({
-      from: 'Vibe E-Book Store <onboarding@resend.dev>',
+      from: 'E-Book Store <onboarding@resend.dev>',
       to: customerEmail,
-      subject: `🎉 [Vibe E-Book] ลิงก์ดาวน์โหลดหนังสือ: ${bookTitle}`,
+      subject: `🎉 [E-Book Store] ลิงก์ดาวน์โหลดหนังสือ: ${bookTitle}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8fafc;">
           <div style="background-color: #ffffff; border-radius: 16px; padding: 32px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
             
             <div style="text-align: center; margin-bottom: 24px;">
-              <h1 style="color: #2563eb; font-size: 24px; font-weight: 800; margin: 0; letter-spacing: -0.5px;">Vibe E-Book Store</h1>
+              <h1 style="color: #2563eb; font-size: 24px; font-weight: 800; margin: 0; letter-spacing: -0.5px;">E-Book Store</h1>
               <p style="color: #64748b; font-size: 13px; margin: 4px 0 0 0;">คลังหนังสือดิจิทัลสำหรับนักพัฒนา</p>
             </div>
 

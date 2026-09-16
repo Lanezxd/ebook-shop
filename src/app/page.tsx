@@ -7,7 +7,6 @@ import {
   BookOpen,
   ShoppingCart,
   Smartphone,
-  Sparkles,
   Zap,
   ShieldCheck,
   Search,
@@ -28,42 +27,33 @@ interface Book {
 
 // ข้อมูลสำรองอย่างน้อย 3 เล่ม (กรณีที่ยังไม่ได้รัน SQL บน Supabase ให้หน้าร้านยังแสดงผลได้อย่างสมบูรณ์แบบ)
 const DEFAULT_BOOKS: Book[] = [
-  (
-    {
-      id: 1,
-      title: 'Next.js 15 & React 19 Fullstack Mastery',
-      description:
-        'คู่มือพัฒนาเว็บแอปพลิเคชันสมัยใหม่ด้วย Next.js App Router, Server Actions และ TypeScript ครบวงจรตั้งแต่เริ่มต้นจน Deploy ขึ้น Vercel',
-      price: 490,
-      cover_url:
-        'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop',
-      file_path: 'ebooks/nextjs-fullstack-mastery.pdf',
-    }
-  ),
-  (
-    {
-      id: 2,
-      title: 'The Art of Vibe Coding: AI-Driven Development',
-      description:
-        'เทคนิคการเขียนโค้ดและส่งมอบซอฟต์แวร์ด้วย AI Agents และ LLMs อย่างมีประสิทธิภาพ ก้าวสู่ยุคใหม่ของนักพัฒนาที่มีพลังในการสร้างสรรค์ไร้ขีดจำกัด',
-      price: 390,
-      cover_url:
-        'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
-      file_path: 'ebooks/vibe-coding-guide.pdf',
-    }
-  ),
-  (
-    {
-      id: 3,
-      title: 'Mastering Supabase & PostgreSQL Architecture',
-      description:
-        'เจาะลึกการออกแบบฐานข้อมูล, Row Level Security (RLS), Realtime และ Edge Functions เพื่อสร้างระบบหลังบ้านที่ปลอดภัยและรองรับการขยายตัวได้ดีเยี่ยม',
-      price: 550,
-      cover_url:
-        'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop',
-      file_path: 'ebooks/mastering-supabase.pdf',
-    }
-  ),
+  {
+    id: 1,
+    title: 'Media Player PRO',
+    description:
+      'เล่นได้มากกว่า...มากกว่าการฟังและดู คู่มือการใช้งาน Media Player PRO อย่างละเอียด พร้อมเทคนิคการเล่นไฟล์เพลงและวิดีโอ การจัดการรายการเพลง และการควบคุมฟังก์ชันครบครัน',
+    price: 390,
+    cover_url: '/images/media-player-pro.jpg',
+    file_path: 'ebooks/media-player-pro.pdf',
+  },
+  {
+    id: 2,
+    title: 'Tarot Reading PRO',
+    description:
+      'เรียนรู้การอ่านไพ่ทาโรต์ เข้าใจความหมาย ตีความได้จริง ใช้ได้ในชีวิตประจำวัน ปูพื้นฐานครบทุกใบ พร้อมวิธีการตีความและตัวอย่างการใช้งานจริง',
+    price: 199,
+    cover_url: '/images/tarot-reading-pro.jpg',
+    file_path: 'ebooks/tarot-reading-pro.pdf',
+  },
+  {
+    id: 3,
+    title: 'SQLite Task Manager PRO',
+    description:
+      'คู่มือการจัดการงานด้วย SQLite: สร้างระบบ Task Manager ของคุณเอง ตั้งแต่พื้นฐานการใช้งาน SQLite จนถึงการจัดการงานอย่างเป็นระบบ',
+    price: 259,
+    cover_url: '/images/sqlite-task-manager-pro.jpg',
+    file_path: 'ebooks/sqlite-task-manager-pro.pdf',
+  },
 ];
 
 export default function HomePage() {
@@ -80,7 +70,59 @@ export default function HomePage() {
           .order('id', { ascending: true });
 
         if (!error && data && data.length > 0) {
-          setBooks(data);
+          const formattedBooks = data.map((b) => {
+            // หากเป็นหนังสือเล่มแรก (id 1) หรือ path ไม่ถูกต้อง ให้ใช้รูปหน้าปก Media Player PRO
+            if (
+              b.id === 1 ||
+              b.cover_url?.startsWith('C:') ||
+              b.cover_url?.includes('Downloads') ||
+              b.cover_url?.includes('media-player-pro')
+            ) {
+              return {
+                ...b,
+                title: b.title || 'Media Player PRO',
+                description:
+                  b.description?.includes('Next.js')
+                    ? 'เล่นได้มากกว่า...มากกว่าการฟังและดู คู่มือการใช้งาน Media Player PRO อย่างละเอียด พร้อมเทคนิคการเล่นไฟล์เพลงและวิดีโอ การจัดการรายการเพลง และการควบคุมฟังก์ชันครบครัน'
+                    : b.description,
+                cover_url: '/images/media-player-pro.jpg',
+              };
+            }
+            // หากเป็นหนังสือเล่มที่ 2 ให้ใช้รูปหน้าปก Tarot Reading PRO
+            if (
+              b.id === 2 ||
+              b.cover_url?.includes('photo-1618005182384') ||
+              b.cover_url?.includes('tarot-reading-pro')
+            ) {
+              return {
+                ...b,
+                title: b.title || 'Tarot Reading PRO',
+                description:
+                  !b.description || b.description.includes('AI-Driven') || b.description.includes('Vibe Coding')
+                    ? 'เรียนรู้การอ่านไพ่ทาโรต์ เข้าใจความหมาย ตีความได้จริง ใช้ได้ในชีวิตประจำวัน ปูพื้นฐานครบทุกใบ พร้อมวิธีการตีความและตัวอย่างการใช้งานจริง'
+                    : b.description,
+                cover_url: '/images/tarot-reading-pro.jpg',
+              };
+            }
+            // หากเป็นหนังสือเล่มที่ 3 ให้ใช้รูปหน้าปก SQLite Task Manager PRO
+            if (
+              b.id === 3 ||
+              b.cover_url?.includes('photo-1544383835') ||
+              b.cover_url?.includes('sqlite-task-manager-pro')
+            ) {
+              return {
+                ...b,
+                title: b.title || 'SQLite Task Manager PRO',
+                description:
+                  !b.description || b.description.includes('PostgreSQL') || b.description.includes('Supabase & PostgreSQL')
+                    ? 'คู่มือการจัดการงานด้วย SQLite: สร้างระบบ Task Manager ของคุณเอง ตั้งแต่พื้นฐานการใช้งาน SQLite จนถึงการจัดการงานอย่างเป็นระบบ'
+                    : b.description,
+                cover_url: '/images/sqlite-task-manager-pro.jpg',
+              };
+            }
+            return b;
+          });
+          setBooks(formattedBooks);
           setIsLiveDatabase(true);
         } else {
           // หากตารางยังว่าง หรือยังไม่ได้รัน SQL Schema ให้ใช้ข้อมูล Default 3 เล่ม
@@ -106,14 +148,9 @@ export default function HomePage() {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition">
               <BookOpen className="w-5 h-5" />
             </div>
-            <div>
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 flex items-center gap-1">
-                Vibe <span className="text-blue-600">E-Book</span>
-              </span>
-              <span className="text-[10px] block text-slate-500 font-medium -mt-1">
-                Digital Bookstore for Devs
-              </span>
-            </div>
+            <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 flex items-center gap-1">
+              E-Book <span className="text-blue-600">Store</span>
+            </span>
           </Link>
 
           <div className="flex items-center gap-3">
@@ -128,68 +165,21 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-6 pb-10 sm:pt-14 sm:pb-16 px-4 sm:px-6 bg-gradient-to-b from-white via-slate-50 to-slate-50 border-b border-slate-200/60">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge (ปรับให้กระชับบนจอมือถือ อยู่ในบรรทัดเดียว ไม่ตัดคำ) */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60 mb-4 sm:mb-5 shadow-xs whitespace-nowrap">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-            <span className="hidden sm:inline">คลังหนังสือดิจิทัลยุคใหม่สำหรับนักพัฒนา</span>
-            <span className="sm:hidden">คลัง E-book สำหรับนักพัฒนา</span>
-            <span className="w-1 h-1 rounded-full bg-blue-400 shrink-0" />
-            <span className="text-slate-500 font-normal">อัปเดต 2026</span>
-          </div>
-
-          {/* Headline (ป้องกัน E-book หลุดบรรทัดเป็น E- / book) */}
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.25] sm:leading-[1.2]">
-            <span className="block sm:inline">เรียนรู้เทคโนโลยีด้วย</span>{' '}
-            <span className="whitespace-nowrap bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
-              E-book ฉบับกระชับ
-            </span>
-          </h1>
-
-          {/* Description Paragraph (จัดข้อความให้อ่านง่าย สบายตา ไม่ตัดคำหลุดบรรทัดบนมือถือ) */}
-          <div className="mt-3.5 sm:mt-4 text-[13px] sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed sm:leading-relaxed px-2 sm:px-0">
-            <p className="hidden sm:block">
-              คู่มือเชิงปฏิบัติการ อัดแน่นด้วยตัวอย่างโค้ดจริง สั่งซื้อง่ายผ่าน PromptPay QR
-              รับไฟล์ PDF เข้าอีเมลทันทีพร้อมอ่านได้ทุกอุปกรณ์
-            </p>
-            <div className="sm:hidden space-y-1 text-slate-600">
-              <p>คู่มือเชิงปฏิบัติการ อัดแน่นด้วยตัวอย่างโค้ดจริง</p>
-              <p className="text-slate-500 text-xs">สั่งซื้อง่ายผ่าน PromptPay • รับไฟล์เข้าอีเมลทันที</p>
-            </div>
-          </div>
-
-          {/* Value Props Pills */}
-          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-[11px] sm:text-xs text-slate-600">
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs whitespace-nowrap">
-              <Smartphone className="w-3.5 h-3.5 text-blue-600 shrink-0" /> อ่านได้ทุกอุปกรณ์
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs whitespace-nowrap">
-              <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0" /> ส่งเข้าอีเมลทันที
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs whitespace-nowrap">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" /> จ่ายผ่าน PromptPay
-            </span>
-          </div>
-        </div>
-      </section>
-
       {/* Main Content: Books Showcase */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14 flex-1 w-full">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-16 sm:pt-12 sm:pb-20 flex-1 w-full">
         {/* Section Title */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-3 pb-5 border-b border-slate-200/80">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-blue-600 block mb-1">
               Featured Books
             </span>
-            <h2 className="text-2xl font-extrabold text-slate-900">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               หนังสือแนะนำทั้งหมด ({books.length} เล่ม)
-            </h2>
+            </h1>
           </div>
-          <div className="flex items-center gap-2 text-xs text-slate-500">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-            <span>พร้อมจัดส่งไฟล์ทันทีหลังชำระเงิน</span>
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 bg-white px-3.5 py-1.5 rounded-full border border-slate-200/80 shadow-xs w-fit">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span className="font-medium">พร้อมจัดส่งไฟล์ทันทีหลังชำระเงิน</span>
           </div>
         </div>
 
@@ -218,20 +208,33 @@ export default function HomePage() {
                 className="group bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 hover:border-blue-200 transition-all duration-300 flex flex-col overflow-hidden"
               >
                 {/* Book Cover Image Container */}
-                <div className="relative h-60 w-full overflow-hidden bg-slate-100">
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-950 flex items-center justify-center">
+                  {/* Backdrop blur effect */}
+                  <img
+                    src={book.cover_url}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40 scale-125 pointer-events-none"
+                    onError={(e) => {
+                      (e.target as HTMLElement).style.display = 'none';
+                    }}
+                  />
                   <img
                     src={book.cover_url}
                     alt={book.title}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/images/media-player-pro.jpg';
+                    }}
+                    className="relative max-h-full max-w-full object-contain py-2 drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Floating Badges */}
-                  <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-1.5">
+                  <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-1.5 z-10">
                     <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/90 backdrop-blur-md text-slate-800 shadow-xs border border-white/60">
                       PDF E-book
                     </span>
                   </div>
-                  <div className="absolute bottom-3 right-3">
+                  <div className="absolute bottom-3 right-3 z-10">
                     <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-900/80 backdrop-blur-md text-white">
                       ดิจิทัลดาวน์โหลด
                     </span>
@@ -324,7 +327,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-blue-400" />
-            <span className="font-bold text-slate-200">Vibe E-Book Store</span>
+            <span className="font-bold text-slate-200">E-Book Store</span>
             <span>— ร้านขายหนังสือดิจิทัลสำหรับนักพัฒนา</span>
           </div>
           <div className="flex items-center gap-4">

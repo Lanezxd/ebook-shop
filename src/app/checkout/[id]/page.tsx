@@ -31,33 +31,30 @@ interface Book {
 const FALLBACK_BOOKS: Record<string, Book> = {
   '1': {
     id: 1,
-    title: 'Next.js 15 & React 19 Fullstack Mastery',
+    title: 'Media Player PRO',
     description:
-      'คู่มือพัฒนาเว็บแอปพลิเคชันสมัยใหม่ด้วย Next.js App Router, Server Actions และ TypeScript ครบวงจรตั้งแต่เริ่มต้นจน Deploy ขึ้น Vercel',
-    price: 490,
-    cover_url:
-      'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop',
-    file_path: 'ebooks/nextjs-fullstack-mastery.pdf',
+      'เล่นได้มากกว่า...มากกว่าการฟังและดู คู่มือการใช้งาน Media Player PRO อย่างละเอียด พร้อมเทคนิคการเล่นไฟล์เพลงและวิดีโอ การจัดการรายการเพลง และการควบคุมฟังก์ชันครบครัน',
+    price: 390,
+    cover_url: '/images/media-player-pro.jpg',
+    file_path: 'ebooks/media-player-pro.pdf',
   },
   '2': {
     id: 2,
-    title: 'The Art of Vibe Coding: AI-Driven Development',
+    title: 'Tarot Reading PRO',
     description:
-      'เทคนิคการเขียนโค้ดและส่งมอบซอฟต์แวร์ด้วย AI Agents และ LLMs อย่างมีประสิทธิภาพ ก้าวสู่ยุคใหม่ของนักพัฒนาที่มีพลังในการสร้างสรรค์ไร้ขีดจำกัด',
-    price: 390,
-    cover_url:
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
-    file_path: 'ebooks/vibe-coding-guide.pdf',
+      'เรียนรู้การอ่านไพ่ทาโรต์ เข้าใจความหมาย ตีความได้จริง ใช้ได้ในชีวิตประจำวัน ปูพื้นฐานครบทุกใบ พร้อมวิธีการตีความและตัวอย่างการใช้งานจริง',
+    price: 199,
+    cover_url: '/images/tarot-reading-pro.jpg',
+    file_path: 'ebooks/tarot-reading-pro.pdf',
   },
   '3': {
     id: 3,
-    title: 'Mastering Supabase & PostgreSQL Architecture',
+    title: 'SQLite Task Manager PRO',
     description:
-      'เจาะลึกการออกแบบฐานข้อมูล, Row Level Security (RLS), Realtime และ Edge Functions เพื่อสร้างระบบหลังบ้านที่ปลอดภัยและรองรับการขยายตัวได้ดีเยี่ยม',
-    price: 550,
-    cover_url:
-      'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop',
-    file_path: 'ebooks/mastering-supabase.pdf',
+      'คู่มือการจัดการงานด้วย SQLite: สร้างระบบ Task Manager ของคุณเอง ตั้งแต่พื้นฐานการใช้งาน SQLite จนถึงการจัดการงานอย่างเป็นระบบ',
+    price: 259,
+    cover_url: '/images/sqlite-task-manager-pro.jpg',
+    file_path: 'ebooks/sqlite-task-manager-pro.pdf',
   },
 };
 
@@ -74,6 +71,7 @@ export default function CheckoutPage() {
   // ฟอร์มข้อมูลลูกค้า
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(true);
 
   // ดึงข้อมูลหนังสือจาก Supabase ตาม bookId
@@ -88,7 +86,41 @@ export default function CheckoutPage() {
           .maybeSingle();
 
         if (data && !error) {
-          setBook(data);
+          const formatted = {
+            ...data,
+            title:
+              data.id === 1
+                ? data.title || 'Media Player PRO'
+                : data.id === 2
+                ? data.title || 'Tarot Reading PRO'
+                : data.id === 3
+                ? data.title || 'SQLite Task Manager PRO'
+                : data.title,
+            description:
+              data.id === 1 && data.description?.includes('Next.js')
+                ? 'เล่นได้มากกว่า...มากกว่าการฟังและดู คู่มือการใช้งาน Media Player PRO อย่างละเอียด พร้อมเทคนิคการเล่นไฟล์เพลงและวิดีโอ การจัดการรายการเพลง และการควบคุมฟังก์ชันครบครัน'
+                : data.id === 2 && (!data.description || data.description.includes('AI-Driven') || data.description.includes('Vibe Coding'))
+                ? 'เรียนรู้การอ่านไพ่ทาโรต์ เข้าใจความหมาย ตีความได้จริง ใช้ได้ในชีวิตประจำวัน ปูพื้นฐานครบทุกใบ พร้อมวิธีการตีความและตัวอย่างการใช้งานจริง'
+                : data.id === 3 && (!data.description || data.description.includes('PostgreSQL') || data.description.includes('Supabase & PostgreSQL'))
+                ? 'คู่มือการจัดการงานด้วย SQLite: สร้างระบบ Task Manager ของคุณเอง ตั้งแต่พื้นฐานการใช้งาน SQLite จนถึงการจัดการงานอย่างเป็นระบบ'
+                : data.description,
+            cover_url:
+              data.id === 1 ||
+              data.cover_url?.startsWith('C:') ||
+              data.cover_url?.includes('Downloads') ||
+              data.cover_url?.includes('media-player-pro')
+                ? '/images/media-player-pro.jpg'
+                : data.id === 2 ||
+                  data.cover_url?.includes('photo-1618005182384') ||
+                  data.cover_url?.includes('tarot-reading-pro')
+                ? '/images/tarot-reading-pro.jpg'
+                : data.id === 3 ||
+                  data.cover_url?.includes('photo-1544383835') ||
+                  data.cover_url?.includes('sqlite-task-manager-pro')
+                ? '/images/sqlite-task-manager-pro.jpg'
+                : data.cover_url,
+          };
+          setBook(formatted);
         } else if (FALLBACK_BOOKS[bookId]) {
           // หากยังไม่มีใน DB ให้ใช้ Fallback เพื่อให้ทดสอบหน้าเว็บได้ทันที
           setBook(FALLBACK_BOOKS[bookId]);
@@ -227,7 +259,7 @@ export default function CheckoutPage() {
           </Link>
           <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-base sm:text-lg text-blue-600 whitespace-nowrap shrink-0">
             <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-            <span>Vibe Checkout</span>
+            <span>E-Book Store</span>
           </div>
           <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs text-emerald-700 bg-emerald-50 px-2 sm:px-2.5 py-1 rounded-full border border-emerald-200 whitespace-nowrap shrink-0">
             <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
@@ -404,6 +436,9 @@ export default function CheckoutPage() {
                     <img
                       src={book.cover_url}
                       alt={book.title}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/media-player-pro.jpg';
+                      }}
                       className="w-full h-full object-cover"
                     />
                   </div>
